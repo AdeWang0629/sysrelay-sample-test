@@ -1,84 +1,25 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-
 import eye from '../assets/eye.png'
 import zoom_in from '../assets/zoom-in.png'
 import { Link } from 'react-router-dom'
-
-const meka = [
-    {
-        id: 0,
-        name: '---',
-    },
-    {
-        id: 1,
-        name: 'SUBARU',
-    },
-    {
-        id: 2,
-        name: 'スズキ',
-    },
-]
-
-const newOld = [
-    {
-        id: 0,
-        name: '---',
-    },
-    {
-        id: 1,
-        name: '新',
-    },
-    {
-        id: 2,
-        name: '旧',
-    },
-]
-
-const attribute = [
-    {
-        id: 0,
-        name: '---',
-    },
-    {
-        id: 1,
-        name: 'コーティング',
-    },
-    {
-        id: 2,
-        name: '純正',
-    },
-    {
-        id: 3,
-        name: '社外',
-    },
-    {
-        id: 4,
-        name: 'その他用品',
-    },
-    {
-        id: 5,
-        name: '費用関連',
-    },
-]
+import { meka, newOld, attribute, navItmes, breadcrumbs } from '../data'
 
 const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }
 
-const Save = () => {
+const Save = ({selectedItem, selectedBread, setSelectedBread}) => {
     const [selectedMeka, setSelectedMeka] = useState(meka[0])
     const [selectedNewOld, setSelectedNewOld] = useState(newOld[0])
-    const series = useState('')
     const [selectedAttribute, setSelectedAttribute] = useState(attribute[0])
-
 
     return (
         <div>
             <div className="flex pl-10 pt-6">
                 <h1 className="text-2xl font-semibold">
-                    受注金額未登録
+                    {navItmes[selectedItem]}{breadcrumbs[selectedBread]}
                 </h1>
             </div>
             <div className="overflow-x-auto mt-10 py-5 px-5 bg-stone-300 mx-4">
@@ -225,7 +166,7 @@ const Save = () => {
                                     placeholder="---"
                                 />
                                 <div className="absolute inset-y-0 right-0 flex items-center">
-                                    <img src={eye} width={'18px'} className='mr-2'/> 
+                                    <img src={eye} width={'18px'} className='mr-2' alt='eye'/> 
                                 </div>
                             </div>
                         </div>
@@ -305,7 +246,7 @@ const Save = () => {
                                     placeholder="---"
                                 />
                                 <div className="absolute inset-y-0 right-0 flex items-center">
-                                    <img src={eye} width={'18px'} className='mr-2'/> 
+                                    <img src={eye} width={'18px'} className='mr-2' alt='eye'/> 
                                 </div>
                             </div>
                         </div>
@@ -320,7 +261,7 @@ const Save = () => {
                                     placeholder="---"
                                 />
                                 <div className="absolute inset-y-0 right-0 flex items-center">
-                                    <img src={eye} width={'18px'} className='mr-2'/> 
+                                    <img src={eye} width={'18px'} className='mr-2' alt='eye'/> 
                                 </div>
                             </div>
                         </div>
@@ -335,7 +276,7 @@ const Save = () => {
                                     placeholder="---"
                                 />
                                 <div className="absolute inset-y-0 right-0 flex items-center">
-                                    <img src={eye} width={'18px'} className='mr-2'/> 
+                                    <img src={eye} width={'18px'} className='mr-2' alt='eye'/> 
                                 </div>
                             </div>
                         </div>
@@ -350,7 +291,7 @@ const Save = () => {
                                     placeholder="---"
                                 />
                                 <div className="absolute inset-y-0 right-0 flex items-center">
-                                    <img src={eye} width={'18px'} className='mr-2'/> 
+                                    <img src={eye} width={'18px'} className='mr-2' alt='eye'/> 
                                 </div>
                             </div>
                         </div>
@@ -365,7 +306,7 @@ const Save = () => {
                                     placeholder="---"
                                 />
                                 <div className="absolute inset-y-0 right-0 flex items-center">
-                                    <img src={zoom_in} width={'18px'} className='mr-2'/> 
+                                    <img src={zoom_in} width={'18px'} className='mr-2' alt='zoom_id'/> 
                                 </div>
                             </div>
                         </div>
@@ -496,7 +437,9 @@ const Save = () => {
                     </div>
                 </div>
                 <div className='pt-5'>
-                    <button className='bg-blue-500 w-64 h-10 text-white font-semibold rounded-l-3xl'><Link to='/'>キャンセル</Link></button>
+                    <Link to='/'>
+                        <button className='bg-blue-500 w-64 h-10 text-white font-semibold rounded-l-3xl' onClick={() => setSelectedBread(0)}>キャンセル</button>
+                    </Link>
                     <button className='bg-white w-64 h-10 font-semibold rounded-r-3xl'>取得</button>
                 </div>
             </div>

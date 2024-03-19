@@ -1,12 +1,13 @@
 import plusCircle from '../assets/plus-circle.png'
 import { Link } from 'react-router-dom';
+import { navItmes, breadcrumbs } from '../data';
 
-const Index = () => {
+const Index = ({selectedItem, selectedBread, setSelectedBread}) => {
     return (
         <div>
             <div className="flex pl-10 pt-6">
                 <h1 className="text-2xl font-semibold">
-                    受注金額未入力
+                    {navItmes[selectedItem]}{breadcrumbs[selectedBread]}
                 </h1>
             </div>
             <div className="overflow-x-auto pt-16">
@@ -14,8 +15,8 @@ const Index = () => {
                 <div className="flex pl-10 pb-10">
                     <Link to={'/save'}>
                         <button className='flex bg-blue-600 p-2 rounded-3xl text-white w-48 justify-center' >
-                            <img src={plusCircle} className='pr-1'/> 
-                            <span className='ml-5'>新規登録</span>
+                            <img src={plusCircle} className='pr-1' alt='plusCircle'/> 
+                            <span className='ml-5' onClick={() => setSelectedBread(1)}>新規登録</span>
                         </button>
                     </Link>
                 </div>
